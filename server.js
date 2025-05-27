@@ -48,6 +48,7 @@ app.get("/:universalURL", (req, res) => {
    res.send("404 URL NOT FOUND");
 });
 
+// Auth starts here
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -56,22 +57,30 @@ app.post('/login', (req, res) => {
   const user = db.users.find(u => u.username === username);
 
   if (user && bcrypt.compareSync(password, user.password)) {
-    const token = jwt.sign({ userId: user.id, username: user.username, roleId: user.roleId }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username: user.username, roles: user.roles }, JWT_SECRET, { expiresIn: '1h' });
     res.json({ accessToken: token });
   } else {
     res.status(401).json({ message: 'Invalid credentials' });
   }
 });
 
+// Auth ends here here
+
+// User management starts here
+
 app.get('/protected/users', authenticateToken, (req, res) => {
   const db = readDb();
   res.json(db.users);
 });
 
+// User managements ends here
+
+// Role management starts here
 app.get('/public/roles', (req, res) => {
   const db = readDb();
   res.json(db.roles);
 });
+// Role management ends here
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
