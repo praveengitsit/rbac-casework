@@ -1,0 +1,69 @@
+<div>
+  <div>
+    <div>
+      <div>
+        <img src="assets/images/app-logo.png" alt="app-logo" />
+      </div>
+      <div>Welcome to YouPass</div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+            />
+            @if (
+              loginForm.controls["username"].invalid &&
+              (loginForm.controls["username"].touched ||
+                loginForm.controls["username"].dirty)
+            ) {
+              @if (loginForm.controls["username"].errors?.["required"]) {
+                <small>*Username is a required field</small>
+              }
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+            />
+            @if (
+              loginForm.controls["password"].invalid &&
+              (loginForm.controls["password"].touched ||
+                loginForm.controls["password"].dirty)
+            ) {
+              @if (loginForm.controls["password"].errors?.["required"]) {
+                <small>*Password is a required field</small>
+              }
+            }
+          </div>
+
+          <button
+            [disabled]="
+              formSubmissionStatus === FormSubmissionStatus.inProgress
+            "
+            class="btn btn-primary"
+          >
+            @if (formSubmissionStatus === FormSubmissionStatus.inProgress) {
+              <span class="spinner-border spinner-border-sm mr-1"></span>
+            }
+
+            Login
+          </button>
+          <!-- @if (formSubmissionStatus === FormSubmissionStatus.failure) {
+            <div class="alert alert-danger mt-3 mb-0">
+              {{ error }}
+            </div>
+          } -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
