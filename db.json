@@ -1,0 +1,39 @@
+{
+  "permissions": [
+    {
+      "id": 1,
+      "name": "view_users",
+      "description": "Can view all users"
+    },
+    {
+      "id": 2,
+      "name": "create_users",
+      "description": "Can create new user"
+    },
+    {
+      "id": 3,
+      "name": "edit_users",
+      "description": "Can edit existing user"
+    },
+    {
+      "id": 4,
+      "name": "delete_users",
+      "description": "Can delete existing user"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "superadmin",
+      "permissionIds": [1, 2, 3, 4]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "superadmin",
+      "password": "$2a$10$iG7ssFL9tAyeU3b/udgADefa1OVe75rUq09uvnHQPhEyWI6erH5K6",
+      "roleId": 1
+    }
+  ]
+}
