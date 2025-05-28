@@ -19,9 +19,9 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () =>
-          import('./features/user-management/user-management.component').then(
-            (m) => m.UserManagementComponent,
-          ),
+          import(
+            './features/user-management/components/user-management.component'
+          ).then((m) => m.UserManagementComponent),
       },
     ],
   },
