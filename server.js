@@ -22,7 +22,7 @@ const dbPath = path.join(__dirname, 'db.json');
 // Helper function to read the database
 async function readDatabase() {
   try {
-    const data = await fs.readFile(dbFilePath, 'utf8');
+   const data = await fs.promises.readFile(dbPath, 'utf8');
     return JSON.parse(data);
   } catch (error) {
     console.error('Error reading database:', error);
@@ -33,7 +33,7 @@ async function readDatabase() {
 // Helper function to write to the database
 async function writeDatabase(data) {
   try {
-    await fs.writeFile(dbFilePath, JSON.stringify(data, null, 2), 'utf8');
+   await fs.promises.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf8');
     return true;
   } catch (error) {
     console.error('Error writing to database:', error);
@@ -54,15 +54,11 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-app.get("/:universalURL", (req, res) => {
-   res.send("404 URL NOT FOUND");
-});
-
 // Auth starts here
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const db = readDatabase();
+  const db = await readDatabase();
 
   const user = db.users.find(u => u.username === username);
 
