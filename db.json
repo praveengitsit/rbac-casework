@@ -1,39 +1,67 @@
 {
   "permissions": [
     {
-      "id": 1,
+      "name": "view_roles",
+      "description": "Can view all roles",
+      "assignable": "false"
+    },
+    {
+      "name": "create_roles",
+      "description": "Can create new role",
+      "assignable": "false"
+    },
+    {
+      "name": "edit_roles",
+      "description": "Can edit existing role",
+      "assignable": "false"
+    },
+    {
+      "name": "delete_roles",
+      "description": "Can delete existing role",
+      "assignable": "false"
+    },
+    {
       "name": "view_users",
-      "description": "Can view all users"
+      "description": "Can view all users",
+      "assignable": "true"
     },
     {
-      "id": 2,
       "name": "create_users",
-      "description": "Can create new user"
+      "description": "Can create new user",
+      "assignable": "true"
     },
     {
-      "id": 3,
       "name": "edit_users",
-      "description": "Can edit existing user"
+      "description": "Can edit existing user",
+      "assignable": "true"
     },
     {
-      "id": 4,
       "name": "delete_users",
-      "description": "Can delete existing user"
+      "description": "Can delete existing user",
+      "assignable": "true"
     }
   ],
   "roles": [
     {
-      "id": 1,
       "name": "superadmin",
-      "permissionIds": [1, 2, 3, 4]
+      "permissionList": [
+        "view_roles",
+        "create_roles",
+        "edit_roles",
+        "delete_roles"
+      ]
     }
   ],
   "users": [
     {
-      "id": 1,
+      "firstName": "Super",
+      "lastName": "Admin",
       "username": "superadmin",
+      "email": "superadmin@gmail.com",
+      "phone": "+1234567890",
+      "department": "HOD IT",
       "password": "$2a$10$iG7ssFL9tAyeU3b/udgADefa1OVe75rUq09uvnHQPhEyWI6erH5K6",
-      "roleId": 1
+      "role": "superadmin"
     }
   ]
 }
