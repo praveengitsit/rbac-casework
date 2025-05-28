@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TableModule } from 'primeng/table';
 import { Role } from '../models/role';
 import { RoleService } from '../services/role.service';
-import { ChipModule } from 'primeng/chip';
 
 @Component({
   selector: 'app-role-management',
-  imports: [TableModule, ChipModule],
+  imports: [],
   templateUrl: './role-management.component.html',
   styleUrl: './role-management.component.scss',
 })
