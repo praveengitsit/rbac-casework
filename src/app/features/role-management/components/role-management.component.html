@@ -1,7 +1,6 @@
 <p-table [value]="roles" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template #header>
     <tr>
-      <th>ID</th>
       <th>Name</th>
       <th>Permissions</th>
       <th>Actions</th>
@@ -9,9 +8,13 @@
   </ng-template>
   <ng-template #body let-role>
     <tr>
-      <td>{{ role.id }}</td>
       <td>{{ role.name }}</td>
-      <td>{{ role.permissions }}</td>
+      <td>
+        @for (permission of role.permissionList; track permission) {
+          <p-chip [label]="permission"></p-chip>
+        }
+      </td>
+      <td>Actions</td>
     </tr>
   </ng-template>
 </p-table>
