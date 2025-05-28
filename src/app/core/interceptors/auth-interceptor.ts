@@ -9,13 +9,20 @@ import { AuthService } from '../../features/auth/services/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) {}
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
+    const isApiEndpoint = request.url.includes('api');
+    if (!isApiEndpoint) {
+      return next.handle(request);
+    }
+
     const token = this.authService.getAccessToken();
 
     if (token) {
