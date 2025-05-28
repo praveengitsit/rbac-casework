@@ -28,10 +28,12 @@ export class AuthService {
   }
 
   private checkAuth(): boolean {
-    const isAccessTokenAvailable = this.localStorageService.getAccessToken()
-      ? true
-      : false;
+    const isAccessTokenAvailable = this.getAccessToken() ? true : false;
     return isAccessTokenAvailable;
+  }
+
+  getAccessToken(): string | null {
+    return this.localStorageService.getAccessToken();
   }
 
   login(loginUserRequest: LoginUserRequest): Observable<boolean> {
