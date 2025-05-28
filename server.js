@@ -57,7 +57,7 @@ app.post('/login', (req, res) => {
   const user = db.users.find(u => u.username === username);
 
   if (user && bcrypt.compareSync(password, user.password)) {
-    const token = jwt.sign({ username: user.username, roles: user.roles }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username: user.username, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
     res.json({ accessToken: token });
   } else {
     res.status(401).json({ message: 'Invalid credentials' });
@@ -76,7 +76,7 @@ app.get('/protected/users', authenticateToken, (req, res) => {
 // User managements ends here
 
 // Role management starts here
-app.get('/public/roles', (req, res) => {
+app.get('/protected/roles', (req, res) => {
   const db = readDb();
   res.json(db.roles);
 });

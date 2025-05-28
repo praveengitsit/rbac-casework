@@ -12,9 +12,9 @@ export const routes: Routes = [
       {
         path: 'roles',
         loadComponent: () =>
-          import('./features/role-management/role-management.component').then(
-            (m) => m.RoleManagementComponent,
-          ),
+          import(
+            './features/role-management/components/role-management.component'
+          ).then((m) => m.RoleManagementComponent),
       },
       {
         path: 'users',
