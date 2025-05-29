@@ -48,7 +48,11 @@
         "view_roles",
         "create_roles",
         "edit_roles",
-        "delete_roles"
+        "delete_roles",
+        "view_users",
+        "create_users",
+        "edit_users",
+        "delete_users"
       ]
     },
     {
@@ -61,8 +65,11 @@
       ]
     },
     {
-      "name": "OfficeAdmin",
-      "permissionList": ["view_users"]
+      "name": "kathmandu",
+      "permissionList": [
+        "create_users",
+        "delete_users"
+      ]
     }
   ],
   "users": [

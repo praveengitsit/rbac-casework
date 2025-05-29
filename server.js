@@ -63,7 +63,7 @@ app.post('/login', async (req, res) => {
   const user = db.users.find(u => u.username === username);
 
   if (user && bcrypt.compareSync(password, user.password)) {
-    const token = jwt.sign({ username: user.username, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username: user.username, role: user.role }, JWT_SECRET, { expiresIn: '24h' });
     res.json({ accessToken: token });
   } else {
     res.status(401).json({ message: 'Invalid credentials' });
@@ -262,7 +262,7 @@ app.delete('/api/roles/:name', authenticateToken, async (req, res) => {
     data.roles = roles;
     const success = await writeDatabase(data);
     if (success) {
-      res.status(200).send('Role deleted successfully');
+      res.json({message: 'Role deleted successfully'});
     } else {
       res.status(500).send('Failed to delete role.');
     }

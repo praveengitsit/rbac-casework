@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>
+  {{ matDialogData.confirmationDialogDetails.title ?? "Confirm" }}
+</h2>
+<mat-dialog-content>
+  {{ matDialogData.confirmationDialogDetails.content }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>
+    {{ matDialogData.confirmationDialogDetails.cancelText ?? "Cancel" }}
+  </button>
+  <button mat-button mat-dialog-close="confirm" cdkFocusInitial>
+    {{ matDialogData.confirmationDialogDetails.confirmText ?? "Confirm" }}
+  </button>
+</mat-dialog-actions>

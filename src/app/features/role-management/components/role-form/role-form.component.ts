@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, Inject, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -15,15 +7,12 @@ import {
 } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
+  MAT_DIALOG_DATA,
   MatDialogModule,
-  MatDialogTitle,
+  MatDialogRef,
 } from '@angular/material/dialog';
 import {
   MatError,
-  MatFormField,
   MatFormFieldModule,
   MatLabel,
 } from '@angular/material/form-field';
@@ -32,6 +21,11 @@ import { PermissionService } from '../../../../core/services/permission.service'
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AppPermission } from '../../../../core/models/app-permission';
 import { MatInputModule } from '@angular/material/input';
+import { PermissionInViewPipe } from '../../../../core/pipes/permission-in-view.pipe';
+import { TitleCasePipe } from '@angular/common';
+import { RoleService } from '../../services/role.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Role {
   id?: string | number; // Optional for new roles
@@ -51,25 +45,33 @@ export interface Role {
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
+    PermissionInViewPipe,
+    TitleCasePipe,
+    MatButtonModule,
   ],
 })
-export class RoleFormComponent implements OnInit, OnChanges {
-  @Input() roleToEdit: Role | null = null;
-  @Output() formSubmit = new EventEmitter<Role>();
+export class RoleFormComponent implements OnInit {
+  // protected readonly matDialogData: {
+  //   roleToEdit: Role;
+  // } = inject(MAT_DIALOG_DATA);
 
   protected permissionListSubscription: Subscription | undefined;
 
   roleForm: FormGroup;
   availablePermissions: AppPermission[] = [];
-  isEditMode = false;
+  // isEditMode = false;
+
+  private _snackBar = inject(MatSnackBar);
 
   constructor(
     private fb: FormBuilder,
     private permissionService: PermissionService,
+    private dialogRef: MatDialogRef<RoleFormComponent>,
+    private roleService: RoleService,
+    @Inject(MAT_DIALOG_DATA)
+    protected readonly matDialogData: {
+      roleToEdit: Role;
+    },
   ) {
     this.roleForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -78,9 +80,16 @@ export class RoleFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    if (this.roleToEdit) {
-      this.isEditMode = true;
-      this.roleForm.patchValue(this.roleToEdit);
+    if (this.matDialogData.roleToEdit !== undefined) {
+      this.roleForm.patchValue({
+        name: this.matDialogData.roleToEdit.name,
+        permissionList: this.matDialogData.roleToEdit.permissionList,
+      });
+
+      const nameFormFieldControl = this.roleForm.get('name');
+      if (nameFormFieldControl) {
+        nameFormFieldControl.disable();
+      }
     }
 
     this.permissionListSubscription = this.permissionService
@@ -92,16 +101,6 @@ export class RoleFormComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['roleToEdit'] && this.roleToEdit) {
-      this.isEditMode = true;
-      this.roleForm.patchValue(this.roleToEdit);
-    } else if (changes['roleToEdit'] && !this.roleToEdit) {
-      this.isEditMode = false;
-      this.roleForm.reset({ name: '', permissionList: [] });
-    }
-  }
-
   get name() {
     return this.roleForm.get('name');
   }
@@ -110,17 +109,48 @@ export class RoleFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
-    if (this.roleForm.valid) {
-      const formData = this.roleForm.value;
-      if (this.isEditMode && this.roleToEdit) {
-        this.formSubmit.emit({ ...this.roleToEdit, ...formData });
-      } else {
-        this.formSubmit.emit(formData);
-      }
-      // Optionally reset form after submission for 'add' mode
-      // if (!this.isEditMode) {
-      //   this.roleForm.reset({ name: '', permissionList: [] });
-      // }
+    if (this.roleForm.invalid) {
+      this.roleForm.markAllAsTouched();
+      return;
     }
+
+    const currentRole: Role = {
+      name: this.roleForm.controls['name'].value,
+      permissionList: this.roleForm.value.permissionList,
+    };
+
+    if (!this.matDialogData.roleToEdit) {
+      this.addNewRole(currentRole);
+    } else {
+      this.updateExistingRole(currentRole);
+    }
+  }
+
+  addNewRole(newRole: Role) {
+    this.roleService.addRole(newRole).subscribe({
+      next: (addedRole) => {
+        this._snackBar.open('Role added successfully', 'OK', {
+          duration: 3000,
+        });
+        this.dialogRef.close(addedRole);
+      },
+      error: (err) => {
+        this.name?.setErrors(err);
+      },
+    });
+  }
+
+  updateExistingRole(updatedRole: Role) {
+    this.roleService.updateRole(updatedRole).subscribe({
+      next: (updatedRole) => {
+        this._snackBar.open('Role updated successfully', 'OK', {
+          duration: 3000,
+        });
+        this.dialogRef.close(updatedRole);
+      },
+      error: (err) => {
+        this.name?.setErrors(err);
+      },
+    });
   }
 }

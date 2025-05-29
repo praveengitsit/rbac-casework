@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Role } from '../../models/role'; // Ensure Role model is imported if not already
 import { RoleService } from '../../services/role.service';
 import { MatTable, MatTableModule } from '@angular/material/table';
@@ -8,6 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { RoleFormComponent } from '../role-form/role-form.component';
+import { PermissionInViewPipe } from '../../../../core/pipes/permission-in-view.pipe';
+import { TitleCasePipe } from '@angular/common';
+import { MatChipsModule } from '@angular/material/chips';
+import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogInterface } from '../../../../shared/components/confirmation-dialog/confirmation-dialog-interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-role-management',
@@ -17,6 +23,9 @@ import { RoleFormComponent } from '../role-form/role-form.component';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    PermissionInViewPipe,
+    TitleCasePipe,
+    MatChipsModule,
   ],
   templateUrl: './role-management.component.html',
   styleUrl: './role-management.component.scss',
@@ -33,10 +42,11 @@ export class RoleManagementComponent implements OnInit, OnDestroy {
   protected roleListSubscription: Subscription | undefined;
 
   @ViewChild(MatTable) table!: MatTable<Role>;
+  private _snackBar = inject(MatSnackBar);
 
   constructor(
     private roleService: RoleService,
-    private dialog: MatDialog,
+    private matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -63,24 +73,48 @@ export class RoleManagementComponent implements OnInit, OnDestroy {
   }
 
   openRoleForm(roleToEdit?: Role) {
-    const dialogRef = this.dialog.open(RoleFormComponent, {
+    const dialogRef = this.matDialog.open(RoleFormComponent, {
       width: '500px', // Example width
-      // You can pass data to the dialog if needed, e.g., for editing
-      data: { roleToEdit: roleToEdit },
+      // You can pass data to the matDialog if needed, e.g., for editing
+      data: { roleToEdit },
     });
-    // dialogRef.componentInstance?.formSubmit.subscribe((formData: Role) => {
-    //   if (formData.id) {
-    //     // Assuming presence of ID means it's an edit
-    //     this.roleService.updateRole(formData).subscribe({
-    //       next: () => console.log('Role updated successfully via dialog'),
-    //       error: (err) => console.error('Error updating role from dialog', err),
-    //     });
-    //   } else {
-    //     this.roleService.addRole(formData).subscribe({
-    //       next: () => console.log('Role added successfully via dialog'),
-    //       error: (err) => console.error('Error adding role from dialog', err),
-    //     });
-    //   }
-    // });
+  }
+
+  openConfirmDialog(roleToDelete: Role) {
+    const confirmationDialogDetails: ConfirmationDialogInterface = {
+      title: 'Confirm',
+      content: `Are you sure you want to delete "${roleToDelete.name}" role?`,
+      confirmText: 'Delete role!',
+      cancelText: 'Go back',
+    };
+
+    const dialogRef = this.matDialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        confirmationDialogDetails,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined && result === 'confirm') {
+        this.deleteRole(roleToDelete);
+      }
+    });
+  }
+
+  deleteRole(roleToDelete: Role) {
+    this.roleService.deleteRole(roleToDelete).subscribe({
+      next: () => {
+        this._snackBar.open('Role deleted successfully', 'OK', {
+          duration: 3000,
+        });
+      },
+      error: () => {
+        this._snackBar.open('Failed to delete role', 'OK', {
+          duration: 3000,
+        });
+      },
+    });
   }
 }

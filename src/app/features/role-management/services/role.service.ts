@@ -41,42 +41,51 @@ export class RoleService {
 
   addRole(role: Role): Observable<Role> {
     return this.http.post<Role>(this.rolesApiEndpoint, role).pipe(
-      switchMap((addedRole) =>
-        this.getRoleList().pipe(
-          // Refresh the list
-          map(() => addedRole), // Then return the addedRole
-        ),
-      ),
+      tap((addedRole) => {
+        const currentRoles = this.roleListSubject.getValue();
+        this.roleListSubject.next([...currentRoles, addedRole]);
+      }),
+      catchError((err) => {
+        console.error('Error adding role:', err);
+        return throwError(() => new Error(err.message));
+      }),
     );
   }
 
-  // updateRole(role: Role): Observable<Role> {
-  //   if (!role.id) {
-  //     return throwError(
-  //       () => new Error('Role ID must be provided for an update.'),
-  //     );
-  //   }
-  //   // Assuming a RESTful API where PUT updates a resource by its ID in the URL
-  //   return this.http
-  //     .put<Role>(`${this.rolesApiEndpoint}/${role.id}`, role)
-  //     .pipe(
-  //       switchMap((updatedRole) =>
-  //         this.getRoleList().pipe(
-  //           // Refresh the list
-  //           map(() => updatedRole), // Then return the updatedRole
-  //         ),
-  //       ),
-  //     );
-  // }
+  updateRole(role: Role): Observable<Role> {
+    // Assuming a RESTful API where PUT updates a resource by its ID in the URL
+    return this.http
+      .put<Role>(`${this.rolesApiEndpoint}/${role.name}`, role)
+      .pipe(
+        tap((updatedRole) => {
+          const currentRoles = this.roleListSubject.getValue();
+          const updatedRoles = currentRoles.map((role) =>
+            role.name === updatedRole.name ? updatedRole : role,
+          );
+          this.roleListSubject.next(updatedRoles);
+        }),
+        catchError((err) => {
+          console.error('Error updating role:', err);
+          return throwError(() => new Error(err.message));
+        }),
+      );
+  }
 
-  deleteRole(id: string | number): Observable<void> {
-    return this.http.delete<void>(`${this.rolesApiEndpoint}/${id}`).pipe(
-      switchMap(() =>
-        this.getRoleList().pipe(
-          // Refresh the list
-          map(() => undefined), // deleteRole returns Observable<void>
-        ),
-      ),
-    );
+  deleteRole(role: Role): Observable<string> {
+    return this.http
+      .delete<string>(`${this.rolesApiEndpoint}/${role.name}`)
+      .pipe(
+        tap(() => {
+          const currentRoles = this.roleListSubject.getValue();
+          const updatedRoles = currentRoles.filter((r) => r.name !== role.name);
+          this.roleListSubject.next(updatedRoles);
+        }),
+        catchError((err) => {
+          console.error('Error deleting role:', err);
+          return throwError(
+            () => new Error(err.message || 'Failed to delete role'),
+          );
+        }),
+      );
   }
 }
