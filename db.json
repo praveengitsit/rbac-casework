@@ -3,42 +3,42 @@
     {
       "name": "view_roles",
       "description": "Can view all roles",
-      "assignable": "false"
+      "assignable": false
     },
     {
       "name": "create_roles",
       "description": "Can create new role",
-      "assignable": "false"
+      "assignable": false
     },
     {
       "name": "edit_roles",
       "description": "Can edit existing role",
-      "assignable": "false"
+      "assignable": false
     },
     {
       "name": "delete_roles",
       "description": "Can delete existing role",
-      "assignable": "false"
+      "assignable": false
     },
     {
       "name": "view_users",
       "description": "Can view all users",
-      "assignable": "true"
+      "assignable": true
     },
     {
       "name": "create_users",
       "description": "Can create new user",
-      "assignable": "true"
+      "assignable": true
     },
     {
       "name": "edit_users",
       "description": "Can edit existing user",
-      "assignable": "true"
+      "assignable": true
     },
     {
       "name": "delete_users",
       "description": "Can delete existing user",
-      "assignable": "true"
+      "assignable": true
     }
   ],
   "roles": [
@@ -50,6 +50,19 @@
         "edit_roles",
         "delete_roles"
       ]
+    },
+    {
+      "name": "admin",
+      "permissionList": [
+        "view_users",
+        "create_users",
+        "edit_users",
+        "delete_users"
+      ]
+    },
+    {
+      "name": "OfficeAdmin",
+      "permissionList": ["view_users"]
     }
   ],
   "users": [

@@ -9,10 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormSubmissionStatus } from '../../../../core/models/form-submission-status';
 import { AuthService } from '../../services/auth.service';
 import { LoginUserRequest } from '../models/login-user-request';
+import { SpinnerComponent } from '../../../../shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SpinnerComponent],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
 

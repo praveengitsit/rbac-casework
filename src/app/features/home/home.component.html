@@ -1,2 +1,10 @@
-<app-sidebar> </app-sidebar>
-<router-outlet></router-outlet>
+<app-navbar></app-navbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened fixedInViewport="true">
+    <app-sidebar> </app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content class="pl-12 pr-12 relative">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

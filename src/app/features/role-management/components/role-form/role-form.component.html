@@ -1,0 +1,89 @@
+<h2 mat-dialog-title>{{ isEditMode ? "Edit Role" : "Add New Role" }}</h2>
+<mat-dialog-content class="mat-typography">
+  <div
+    class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md max-w-lg mx-auto"
+  >
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Role Name -->
+      <div>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label class="text-gray-700 dark:text-gray-300"
+            >Role Name</mat-label
+          >
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Enter role name"
+          />
+          @if (name?.invalid && (name?.dirty || name?.touched)) {
+            <mat-error>
+              @if (name?.errors?.["required"]) {
+                <span>Name is required.</span>
+              }
+              @if (name?.errors?.["minlength"]) {
+                <span>Name must be at least 3 characters long.</span>
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Permission List -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Permissions</mat-label>
+        <mat-select formControlName="permissionList" multiple>
+          <mat-select-trigger>
+            @if (permissionList?.value?.length) {
+              <mat-chip-listbox>
+                @for (permission of permissionList?.value; track permission) {
+                  <mat-chip>{{ permission }}</mat-chip>
+                }
+                @if (permissionList?.value?.length > 2) {
+                  <span class="text-xs ml-1 text-gray-500 dark:text-gray-400">
+                    (+{{ permissionList?.value?.length - 2 }} more)
+                  </span>
+                }
+              </mat-chip-listbox>
+            } @else {
+              <span>Select permissions</span>
+            }
+          </mat-select-trigger>
+          @for (permission of availablePermissions; track permission.name) {
+            <mat-option [value]="permission.name">
+              {{ permission.name }}
+              <small class="text-xs text-gray-500 dark:text-gray-400">
+                {{ permission.description }}
+              </small>
+            </mat-option>
+          }
+        </mat-select>
+        @if (
+          permissionList?.invalid &&
+          (permissionList?.dirty || permissionList?.touched) &&
+          permissionList?.errors?.["required"]
+        ) {
+          <mat-error>At least one permission is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button
+          mat-flat-button
+          type="submit"
+          class="bg-primary text-white hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-500 dark:hover:bg-pink-600 dark:focus:ring-pink-700"
+          [disabled]="roleForm.invalid"
+        >
+          {{ isEditMode ? "Update Role" : "Create Role" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button>Save</button>
+  <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial>
+    Close
+  </button>
+</mat-dialog-actions>

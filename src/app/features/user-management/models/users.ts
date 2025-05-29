@@ -6,4 +6,6 @@ export interface User {
   phone?: string;
   department?: string;
   role: string;
+  createdAt: string;
+  createdBy: string;
 }

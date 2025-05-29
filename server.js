@@ -272,6 +272,21 @@ app.delete('/api/roles/:name', authenticateToken, async (req, res) => {
 });
 // Role management ends here
 
+// Permission API starts here
+
+// GET /api/permissions - Get all permissions
+app.get('/api/permissions/', authenticateToken, async (req, res) => {
+  const data = await readDatabase();
+  const permissions = data.permissions || [];
+
+  if (permissions) {
+    res.json(permissions);
+  } else {
+    res.status(404).send('Permissions not found');
+  }
+});
+  
+
 
 
 app.listen(PORT, () => {
