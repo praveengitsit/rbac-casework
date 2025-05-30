@@ -1,18 +1,22 @@
-<mat-toolbar>
+<mat-toolbar class="navbar-container">
   <mat-toolbar-row>
-    <a href="#" class="flex ms-2 md:me-24">
+    <a routerLink="/" class="navbar-brand">
       <img
         src="assets/images/app-logo.png"
-        class="h-8 me-3"
         alt="YouPass Logo"
+        class="navbar-logo"
       />
-      <span
-        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
-        >YouPass</span
-      >
+      <span class="navbar-app-name">YouPass</span>
     </a>
     <span class="navbar-spacer"></span>
-    <button mat-icon-button aria-label="icon-button with logout icon">
+    <!-- Add (click)="logout()" if you have a logout method in your component -->
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="logout()"
+      aria-label="Logout"
+    >
+      Logout
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar-row>

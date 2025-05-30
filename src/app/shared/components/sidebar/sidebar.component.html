@@ -1,60 +1,19 @@
-<!-- <aside>
-  <nav>
-    <ul>
-      <li>
-        <a routerLink="./roles">Roles</a>
-      </li>
-
-      <li>
-        <a routerLink="./users">Users</a>
-      </li>
-    </ul>
-  </nav>
-</aside> -->
-
-<!-- <aside
-  id="logo-sidebar"
-  class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-  aria-label="Sidebar"
->
-  <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-    <ul class="space-y-2 font-medium">
-      <li>
-        <a
-          routerLink="./roles"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <span class="ms-3">Roles management</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="./users"
-          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-        >
-          <span class="ms-3">Users management</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</aside> -->
-
 <mat-nav-list>
   <ng-container *ngIf="loggedInUser$ | async as user">
     <ng-container *ngIf="user.role === 'superadmin'">
-      <a routerLink="./roles">
-        <mat-list-item>
+      <a mat-list-item routerLink="./roles" routerLinkActive="active-list-item">
+        <div class="icon">
           <mat-icon mat-list-icon>key</mat-icon>
-          <span class="w-100">Role management</span>
-        </mat-list-item>
+          <span>Role management</span>
+        </div>
       </a>
     </ng-container>
   </ng-container>
 
-  <a routerLink="./users">
-    <mat-list-item>
+  <a mat-list-item routerLink="./users" routerLinkActive="active-list-item">
+    <div>
       <mat-icon mat-list-icon>groups</mat-icon>
       <span class="w-100">User management</span>
-    </mat-list-item>
+    </div>
   </a>
 </mat-nav-list>

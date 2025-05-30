@@ -9,7 +9,7 @@
     <button
       mat-flat-button
       (click)="openUserForm()"
-      [disabled]="loggedInUserPermissionsBoolean.hasUserCreatePermission"
+      [disabled]="!loggedInUserPermissionsBoolean.hasUserCreatePermission"
     >
       Add new user
     </button>
@@ -70,7 +70,7 @@
         <mat-menu #menu="matMenu">
           <button
             mat-menu-item
-            [disabled]="loggedInUserPermissionsBoolean.hasUserViewPermission"
+            [disabled]="!loggedInUserPermissionsBoolean.hasUserViewPermission"
           >
             <mat-icon>info</mat-icon>
             <span>View</span>
@@ -79,7 +79,7 @@
             mat-menu-item
             [disabled]="
               user.username === 'superadmin' ||
-              loggedInUserPermissionsBoolean.hasUserEditPermission
+              !loggedInUserPermissionsBoolean.hasUserEditPermission
             "
             (click)="openUserForm(user)"
           >
@@ -90,7 +90,7 @@
             mat-menu-item
             [disabled]="
               user.username === 'superadmin' ||
-              loggedInUserPermissionsBoolean.hasUserDeletePermission
+              !loggedInUserPermissionsBoolean.hasUserDeletePermission
             "
             (click)="openConfirmDialog(user)"
           >

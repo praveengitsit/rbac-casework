@@ -1,3 +1,29 @@
+.navbar-container {
+background: #d7e3ff;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none; // Remove underline from link
+  color: inherit; // Inherit color from toolbar (usually white on primary)
+  margin-right: 24px; // Equivalent to md:me-24 (adjust as needed)
+}
+
+.navbar-logo {
+  height: 32px; // Equivalent to h-8
+  margin-right: 12px; // Equivalent to me-3
+}
+
+.navbar-app-name {
+  font-size: 1.5rem; // Equivalent to sm:text-2xl (adjust as needed, text-xl is smaller)
+  font-weight: 600; // Equivalent to font-semibold
+  white-space: nowrap;
+  // color will be inherited from .navbar-brand, which inherits from mat-toolbar
+}
+
 .navbar-spacer {
-  flex: 1 1 auto;
+  flex: 1 1 auto; // This makes the spacer expand and push items to the sides
 }

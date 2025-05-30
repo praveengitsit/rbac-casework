@@ -1,7 +1,55 @@
-.youpass-sidenav{
-     display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  background: rgba(255, 0, 0, 0.5);
+// Import Angular Material theming functions if you have a custom theme.
+// For example: @use '@angular/material' as mat;
+a {
+text-decoration: none;
+}
+
+mat-nav-list {
+    border-right: 1px solid var(--mat-sys-outline-variant);
+    width: 240px;
+    padding: 16px 8px;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    box-sizing: border-box;
+
+  .sidebar-link {
+    text-decoration: none; // Remove underline from links
+    color: inherit; // Inherit text color
+    display: block; // Make the anchor fill width for better clickability
+
+    mat-list-item {
+      height: 48px; // Standard Material Design list item height
+      font-size: 0.875rem; // 14px, common for list items
+      transition: background-color 0.2s ease-in-out; // Smooth hover transition
+      mat-icon[mat-list-icon] {
+        // Default icon color, can be adjusted
+        color: rgba(0, 0, 0, 0.54);
+        // The mat-list-icon directive handles some spacing,
+        // but you can adjust margin-right if needed, e.g., margin-right: 16px or 32px;
+      }
+
+      div {
+        display: flex;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04); // Subtle hover effect
+      }
+    }
+
+    // Styling for the active link
+    &.active-list-item {
+      mat-list-item {
+        background-color: #e3f2fd; // Example: A light primary-like color (e.g., light blue)
+        // If using a theme: background-color: mat.get-color-from-palette(mat.$blue-palette, 50);
+
+        mat-icon[mat-list-icon],
+        span {
+          color: #1976d2; // Example: A primary color (e.g., blue)
+          // If using a theme: color: mat.get-color-from-palette(mat.$blue-palette, 500);
+          font-weight: 500; // Make active text and icon slightly bolder
+        }
+      }
+    }
+  }
 }
