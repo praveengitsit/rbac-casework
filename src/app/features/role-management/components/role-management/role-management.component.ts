@@ -14,6 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogInterface } from '../../../../shared/components/confirmation-dialog/confirmation-dialog-interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RoleDetailsComponent } from '../role-details/role-details.component';
 
 @Component({
   selector: 'app-role-management',
@@ -72,11 +73,19 @@ export class RoleManagementComponent implements OnInit, OnDestroy {
     }
   }
 
-  openRoleForm(roleToEdit?: Role) {
+  openAddOrEditRoleForm(roleToEdit?: Role) {
     const dialogRef = this.matDialog.open(RoleFormComponent, {
       width: '500px', // Example width
       // You can pass data to the matDialog if needed, e.g., for editing
       data: { roleToEdit },
+    });
+  }
+
+  openRoleDetails(role?: Role) {
+    const dialogRef = this.matDialog.open(RoleDetailsComponent, {
+      width: '500px', // Example width
+      // You can pass data to the matDialog if needed, e.g., for editing
+      data: { role },
     });
   }
 

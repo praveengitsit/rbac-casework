@@ -1,0 +1,62 @@
+<div class="user-details-page-container">
+  <mat-card class="user-details-card">
+    <mat-card-header class="user-details-header">
+      <div mat-card-avatar class="user-avatar">
+        <mat-icon>person</mat-icon>
+      </div>
+      <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+      <mat-card-subtitle>{{ user.role | titlecase }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="user-details-content">
+      <div class="detail-section">
+        <h3 class="section-title">Account Information</h3>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <mat-icon class="detail-icon">badge</mat-icon>
+            <div class="detail-text">
+              <span class="detail-label">Username</span>
+              <span class="detail-value">{{ user.username }}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <mat-icon class="detail-icon">email</mat-icon>
+            <div class="detail-text">
+              <span class="detail-label">Email</span>
+              <span class="detail-value">{{ user.email }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="detail-section">
+        <h3 class="section-title">Contact & Department</h3>
+        <div class="detail-grid">
+          <div class="detail-item" *ngIf="user.phone">
+            <mat-icon class="detail-icon">phone</mat-icon>
+            <div class="detail-text">
+              <span class="detail-label">Phone</span>
+              <span class="detail-value">{{ user.phone }}</span>
+            </div>
+          </div>
+          <div class="detail-item" *ngIf="user.department">
+            <mat-icon class="detail-icon">business</mat-icon>
+            <div class="detail-text">
+              <span class="detail-label">Department</span>
+              <span class="detail-value">{{ user.department }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-stroked-button [mat-dialog-close]="true">
+        Back to User List
+      </button>
+      <!-- Add Edit button if needed, linking to user-form -->
+      <!-- <button mat-flat-button color="primary" (click)="editUser(user)">Edit User</button> -->
+    </mat-card-actions>
+  </mat-card>
+</div>

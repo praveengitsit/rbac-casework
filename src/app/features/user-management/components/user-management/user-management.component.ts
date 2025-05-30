@@ -15,6 +15,7 @@ import { ConfirmationDialogComponent } from '../../../../shared/components/confi
 import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from '../../../auth/services/auth.service';
 import { shareReplay } from 'rxjs/internal/operators/shareReplay';
+import { UserDetailsComponent } from '../user-details/user-details.component';
 
 @Component({
   selector: 'app-user-management',
@@ -89,13 +90,15 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.userListSubscription) {
-      this.userListSubscription.unsubscribe();
-    }
+  openUserDetails(user?: User) {
+    const dialogRef = this.matDialog.open(UserDetailsComponent, {
+      maxWidth: '60vw',
+      // You can pass data to the matDialog if needed, e.g., for editing
+      data: { user },
+    });
   }
 
-  openUserForm(userToEdit?: User) {
+  openUserAddOrEditForm(userToEdit?: User) {
     const dialogRef = this.matDialog.open(UserFormComponent, {
       maxWidth: '60vw',
       // You can pass data to the matDialog if needed, e.g., for editing
@@ -139,5 +142,11 @@ export class UserManagementComponent implements OnInit, OnDestroy {
         });
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userListSubscription) {
+      this.userListSubscription.unsubscribe();
+    }
   }
 }

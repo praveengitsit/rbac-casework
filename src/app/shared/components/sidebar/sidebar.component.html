@@ -1,4 +1,10 @@
 <mat-nav-list>
+  <a mat-list-item routerLink="./landing" routerLinkActive="active-list-item">
+    <div class="icon">
+      <mat-icon mat-list-icon>home</mat-icon>
+      <span>Home</span>
+    </div>
+  </a>
   <ng-container *ngIf="loggedInUser$ | async as user">
     <ng-container *ngIf="user.role === 'superadmin'">
       <a mat-list-item routerLink="./roles" routerLinkActive="active-list-item">

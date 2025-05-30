@@ -6,7 +6,9 @@
         Manage all your existing roles or add a new one
       </p>
     </div>
-    <button mat-flat-button (click)="openRoleForm()">Add new role</button>
+    <button mat-flat-button (click)="openAddOrEditRoleForm()">
+      Add new role
+    </button>
   </div>
 </div>
 
@@ -47,14 +49,14 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="openRoleDetails(role)">
             <mat-icon>info</mat-icon>
             <span>View</span>
           </button>
           <button
             mat-menu-item
             [disabled]="role.name === 'superadmin'"
-            (click)="openRoleForm(role)"
+            (click)="openAddOrEditRoleForm(role)"
           >
             <mat-icon>edit</mat-icon>
             <span>Edit</span>

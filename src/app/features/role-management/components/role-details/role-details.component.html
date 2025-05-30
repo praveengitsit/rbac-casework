@@ -1,0 +1,37 @@
+<div class="role-details-page-container" *ngIf="role; else loadingOrError">
+  <mat-card class="role-details-card">
+    <mat-card-header class="role-details-header">
+      <div mat-card-avatar class="role-avatar">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </div>
+      <mat-card-title>{{ role.name | titlecase }}</mat-card-title>
+      <mat-card-subtitle
+        >See below to learn more about this role.</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content class="role-details-content">
+      <div class="detail-section" *ngIf="role.permissionList?.length">
+        <h3 class="section-title">Permissions</h3>
+        <mat-chip-set aria-label="Role permissions">
+          <mat-chip
+            *ngFor="let permission of role.permissionList"
+            selected
+            color="accent"
+          >
+            {{ permission | titlecase }}
+          </mat-chip>
+        </mat-chip-set>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button mat-dialog-close>Back to Role List</button>
+      <!-- <button mat-flat-button color="primary" (click)="editRole(role)">Edit Role</button> -->
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #loadingOrError>
+  <p class="loading-message">Loading role details or role not found...</p>
+</ng-template>

@@ -41,7 +41,6 @@ import { NgIf } from '@angular/common';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    NgIf,
   ],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss',

@@ -217,12 +217,12 @@ app.delete("/api/users/:username", authenticateToken, async (req, res) => {
     data.users = users;
     const success = await writeDatabase(data);
     if (success) {
-      res.status(200).send("User deleted successfully");
+      res.send({ message: "User deleted successfully" });
     } else {
-      res.status(500).send("Failed to delete user.");
+      res.status(500).send({ message: "Failed to delete user." });
     }
   } else {
-    res.status(404).send("User not found");
+    res.status(404).send({ message: "User not found" });
   }
 });
 

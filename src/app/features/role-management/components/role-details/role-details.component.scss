@@ -1,0 +1,86 @@
+.role-details-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Align card to the top
+  padding: 24px;
+  min-height: calc(100vh - 64px - 48px); // Full height minus navbar and some padding
+  background-color: #f4f7f6; // Light background for the page
+}
+
+.role-details-card {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 8px; // Softer corners
+}
+
+.role-details-header {
+  padding-bottom: 16px; // More space for header
+
+  .role-avatar {
+    background-color: #e8eaf6; // Light indigo, adjust to your theme
+    color: #3f51b5; // Indigo, adjust to your theme
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    mat-icon {
+      font-size: 24px; // Adjust icon size if needed
+    }
+  }
+
+  mat-card-title {
+    font-size: 1.5rem; // Larger title
+    font-weight: 500;
+  }
+
+  mat-card-subtitle {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.role-details-content {
+  padding-top: 0;
+
+  .detail-section {
+    padding: 16px 0;
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 8px;
+    }
+  }
+
+  .role-description {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 1.6;
+    white-space: pre-wrap; // Preserve line breaks in description
+  }
+
+  mat-chip-set {
+    mat-chip {
+      // Using accent color from theme by default with `color="accent"`
+      // You can add more specific styling if needed
+      font-size: 0.875rem;
+    }
+  }
+
+  .no-permissions-message {
+    font-style: italic;
+    color: rgba(0,0,0,0.54);
+    margin-top: 8px;
+  }
+}
+
+.loading-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: rgba(0,0,0,0.6);
+}

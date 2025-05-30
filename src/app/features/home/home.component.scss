@@ -2,20 +2,21 @@
   // Ensure the container takes up the full height available after the navbar
   // The `fixedTopGap` on mat-sidenav handles the visual positioning of the sidenav itself.
   // The container height is important for the scrollability of mat-sidenav-content.
-  height: calc(100vh - 64px); // Assuming navbar height is 64px. Adjust if different.
-                               // This should match the `navbarHeight` property.
+  height: calc(
+    100vh - 64px
+  ); // Assuming navbar height is 64px. Adjust if different.
+  // This should match the `navbarHeight` property.
 }
 
 mat-sidenav {
-  // You can set a width for your sidebar here if not already defined
-  // within app-sidebar or by default mat-sidenav styles.
-  // width: 250px;
-  // background-color: #f5f5f5; // Example: A light grey for the sidebar background
-  // border-right: 1px solid rgba(0, 0, 0, 0.12); // Subtle border
+  width: 220px;
+  border-radius: none;
+  border-right: 1px solid #d7e3fe;
+  border-radius: unset;
 }
 
 .app-main-content {
   padding: 20px; // Add some padding around your main content area
   // background-color: #fafafa; // Optional: A very light background for the content area
-                               // to distinguish from a potentially white sidebar.
+  // to distinguish from a potentially white sidebar.
 }

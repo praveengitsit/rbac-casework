@@ -8,7 +8,7 @@
     </div>
     <button
       mat-flat-button
-      (click)="openUserForm()"
+      (click)="openUserAddOrEditForm()"
       [disabled]="!loggedInUserPermissionsBoolean.hasUserCreatePermission"
     >
       Add new user
@@ -52,7 +52,11 @@
     <ng-container matColumnDef="department">
       <th mat-header-cell *matHeaderCellDef>Department</th>
       <td mat-cell *matCellDef="let user">
-        {{ user.department ?? "-" }}
+        {{
+          user.department === null || user.department === ""
+            ? "-"
+            : user.department
+        }}
       </td>
     </ng-container>
 
@@ -71,6 +75,7 @@
           <button
             mat-menu-item
             [disabled]="!loggedInUserPermissionsBoolean.hasUserViewPermission"
+            (click)="openUserDetails(user)"
           >
             <mat-icon>info</mat-icon>
             <span>View</span>
@@ -81,7 +86,7 @@
               user.username === 'superadmin' ||
               !loggedInUserPermissionsBoolean.hasUserEditPermission
             "
-            (click)="openUserForm(user)"
+            (click)="openUserAddOrEditForm(user)"
           >
             <mat-icon>edit</mat-icon>
             <span>Edit</span>

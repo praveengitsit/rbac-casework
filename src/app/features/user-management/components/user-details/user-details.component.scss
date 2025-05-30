@@ -1,0 +1,100 @@
+.user-details-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Align card to the top
+  padding: 24px;
+  min-height: calc(100vh - 64px - 48px); // Full height minus navbar and some padding
+  background-color: #f4f7f6; // Light background for the page
+}
+
+.user-details-card {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 8px; // Softer corners
+}
+
+.user-details-header {
+  padding-bottom: 16px; // More space for header
+
+  .user-avatar {
+    background-color: #e3f2fd; // Light blue, adjust to your theme
+    color: #1976d2; // Primary blue, adjust to your theme
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    // mat-card-avatar handles sizing, but you can override if needed
+    // width: 40px;
+    // height: 40px;
+
+    mat-icon {
+      font-size: 24px; // Adjust icon size if needed
+    }
+  }
+
+  mat-card-title {
+    font-size: 1.5rem; // Larger title
+    font-weight: 500;
+  }
+
+  mat-card-subtitle {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.user-details-content {
+  padding-top: 0; // Remove default top padding if header has enough
+
+  .detail-section {
+    padding: 16px 0;
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.7);
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 8px;
+    }
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // Responsive grid
+    gap: 20px;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+
+    .detail-icon {
+      color: rgba(0, 0, 0, 0.54);
+      margin-right: 16px;
+    }
+
+    .detail-text {
+      display: flex;
+      flex-direction: column;
+
+      .detail-label {
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.54);
+        margin-bottom: 2px;
+      }
+      .detail-value {
+        font-size: 1rem;
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
+}
+
+.loading-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: rgba(0,0,0,0.6);
+}

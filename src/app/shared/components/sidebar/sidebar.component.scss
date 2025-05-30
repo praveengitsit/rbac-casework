@@ -1,16 +1,16 @@
 // Import Angular Material theming functions if you have a custom theme.
 // For example: @use '@angular/material' as mat;
 a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 mat-nav-list {
-    border-right: 1px solid var(--mat-sys-outline-variant);
-    width: 240px;
-    padding: 16px 8px;
-    height: calc(100vh - 75px);
-    overflow: auto;
-    box-sizing: border-box;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+  width: 220px;
+  padding: 16px 8px;
+  height: calc(100vh - 75px);
+  overflow: auto;
+  box-sizing: border-box;
 
   .sidebar-link {
     text-decoration: none; // Remove underline from links
