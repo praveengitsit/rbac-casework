@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ExtendedUser, User } from '../../models/users';
+import { User } from '../../models/users';
 import { UserService } from '../../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -12,9 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { ConfirmationDialogInterface } from '../../../../shared/components/confirmation-dialog/confirmation-dialog-interface';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
-import { Observable } from 'rxjs/internal/Observable';
 import { AuthService } from '../../../auth/services/auth.service';
-import { shareReplay } from 'rxjs/internal/operators/shareReplay';
 import { UserDetailsComponent } from '../user-details/user-details.component';
 
 @Component({

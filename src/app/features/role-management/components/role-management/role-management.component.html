@@ -1,79 +1,81 @@
-<div class="management-header">
-  <div class="management-header__content">
-    <div>
-      <h5 class="management-header__title">YouPass Roles</h5>
-      <p class="management-header__description">
-        Manage all your existing roles or add a new one
-      </p>
+<div class="main-content-padded">
+  <div class="management-header">
+    <div class="management-header__content">
+      <div>
+        <h5 class="management-header__title">YouPass Roles</h5>
+        <p class="management-header__description">
+          Manage all your existing roles or add a new one
+        </p>
+      </div>
+      <button mat-flat-button (click)="openAddOrEditRoleForm()">
+        Add new role
+      </button>
     </div>
-    <button mat-flat-button (click)="openAddOrEditRoleForm()">
-      Add new role
-    </button>
   </div>
-</div>
 
-<div>
-  <table
-    mat-table
-    [dataSource]="roles"
-    matSort
-    matSortActive="name"
-    matSortDisableClear
-    matSortDirection="asc"
-  >
-    <!-- Role name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let role">{{ role.name }}</td>
-    </ng-container>
+  <div class="table-viewer-wrapper">
+    <table
+      mat-table
+      [dataSource]="roles"
+      matSort
+      matSortActive="name"
+      matSortDisableClear
+      matSortDirection="asc"
+    >
+      <!-- Role name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let role">{{ role.name }}</td>
+      </ng-container>
 
-    <!-- Permission list Column -->
-    <ng-container matColumnDef="permissionList">
-      <th mat-header-cell *matHeaderCellDef>Available permissions</th>
-      <td mat-cell *matCellDef="let role">
-        @for (permission of role.permissionList; track permission) {
-          <mat-chip>{{ permission | permissionInView | titlecase }}</mat-chip>
-        }
-      </td>
-    </ng-container>
+      <!-- Permission list Column -->
+      <ng-container matColumnDef="permissionList">
+        <th mat-header-cell *matHeaderCellDef>Available permissions</th>
+        <td mat-cell *matCellDef="let role">
+          @for (permission of role.permissionList; track permission) {
+            <mat-chip>{{ permission | permissionInView | titlecase }}</mat-chip>
+          }
+        </td>
+      </ng-container>
 
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actionList">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let role">
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="menu"
-          aria-label="Role icon-button with a menu"
-        >
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openRoleDetails(role)">
-            <mat-icon>info</mat-icon>
-            <span>View</span>
-          </button>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actionList">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let role">
           <button
-            mat-menu-item
-            [disabled]="role.name === 'superadmin'"
-            (click)="openAddOrEditRoleForm(role)"
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Role icon-button with a menu"
           >
-            <mat-icon>edit</mat-icon>
-            <span>Edit</span>
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <button
-            mat-menu-item
-            [disabled]="role.name === 'superadmin'"
-            (click)="openConfirmDialog(role)"
-          >
-            <mat-icon>delete</mat-icon>
-            <span>Delete</span>
-          </button>
-        </mat-menu>
-      </td>
-    </ng-container>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openRoleDetails(role)">
+              <mat-icon>info</mat-icon>
+              <span>View</span>
+            </button>
+            <button
+              mat-menu-item
+              [disabled]="role.name === 'superadmin'"
+              (click)="openAddOrEditRoleForm(role)"
+            >
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button
+              mat-menu-item
+              [disabled]="role.name === 'superadmin'"
+              (click)="openConfirmDialog(role)"
+            >
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </div>

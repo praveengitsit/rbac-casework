@@ -4,34 +4,54 @@
 
 // @import "flowbite/dist/flowbite.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
   .mdc-notched-outline__notch {
   border-right-style: hidden;
 }
 
-
 $sm-breakpoint: 640px; // Tailwind's sm breakpoint
 
 $color-white: #ffffff;
 $color-gray-500: #6b7280;
-$color-gray-800: #1f2937; 
+$color-gray-800: #1f2937;
 
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
   0 2px 4px -1px rgba(0, 0, 0, 0.06); // Equivalent to Tailwind's shadow-md
 
-$spacing-unit: 0.25rem; 
+$spacing-unit: 0.25rem;
 $space-3: $spacing-unit * 3;
 $space-4: $spacing-unit * 4;
 $space-6: $spacing-unit * 6;
 
 $border-radius-lg: 0.5rem;
 
-$max-width-lg: 32rem; 
+$max-width-lg: 32rem;
 
-$font-weight-semibold: 600; 
+$font-weight-semibold: 600;
+
+.main-content-padded {
+  padding: 20px;
+}
+
+.table-viewer-wrapper {
+  border-radius: 12px;
+  border: 1px solid;
+  padding: 1rem;
+  margin-top: 2rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
 
 .management-header {
   position: relative;
@@ -50,7 +70,7 @@ $font-weight-semibold: 600;
       margin-top: $space-3;
     }
 
-     @media (min-width: $sm-breakpoint) {
+    @media (min-width: $sm-breakpoint) {
       display: flex; // Corresponds to sm:flex
       align-items: center; // Corresponds to items-center (effective with flex)
       justify-content: space-between; // Corresponds to justify-between (effective with flex)
@@ -65,12 +85,12 @@ $font-weight-semibold: 600;
   }
 
   &__title {
-    margin-right: $space-3; 
-    font-weight: $font-weight-semibold; 
+    margin-right: $space-3;
+    font-weight: $font-weight-semibold;
   }
 
   &__description {
-    color: $color-gray-500; 
+    color: $color-gray-500;
   }
 }
 
