@@ -294,6 +294,17 @@ app.delete("/api/roles/:name", authenticateToken, async (req, res) => {
   const roleNameToDelete = req.params.name;
   const data = await readDatabase();
   let roles = data.roles || [];
+  let users = data.users || [];
+  let userWithRoleExists = users.some((user) => user.role === roleNameToDelete);
+
+  if (userWithRoleExists) {
+    return res.status(500).send({
+      errorCode: "userWithRoleExists",
+      message:
+        "There are active user(s) with this role. Deletion is prohibited.",
+    });
+  }
+
   const initialLength = roles.length;
   roles = roles.filter((r) => r.name !== roleNameToDelete);
 
@@ -303,7 +314,7 @@ app.delete("/api/roles/:name", authenticateToken, async (req, res) => {
     if (success) {
       res.json({ message: "Role deleted successfully" });
     } else {
-      res.status(500).send("Failed to delete role.");
+      res.status(500).send({ message: "Role deleted successfully" });
     }
   } else {
     res.status(404).send("Role not found");

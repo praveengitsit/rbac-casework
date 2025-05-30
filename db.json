@@ -56,18 +56,11 @@
       ]
     },
     {
-      "name": "admin",
+      "name": "kathmandu",
       "permissionList": [
         "view_users",
         "create_users",
         "edit_users",
-        "delete_users"
-      ]
-    },
-    {
-      "name": "kathmandu",
-      "permissionList": [
-        "create_users",
         "delete_users"
       ]
     }

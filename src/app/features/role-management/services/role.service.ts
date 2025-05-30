@@ -76,9 +76,7 @@ export class RoleService {
         }),
         catchError((err) => {
           console.error('Error deleting role:', err);
-          return throwError(
-            () => new Error(err.message || 'Failed to delete role'),
-          );
+          return throwError(() => err.error);
         }),
       );
   }

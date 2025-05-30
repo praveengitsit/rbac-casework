@@ -105,10 +105,25 @@ export class RoleManagementComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result !== undefined && result === 'confirm') {
         this.deleteRole(roleToDelete);
       }
+    });
+  }
+
+  openRoleDeleteErrorDialog(roleToDelete: Role, errorMessage: string) {
+    const confirmationDialogDetails: ConfirmationDialogInterface = {
+      title: 'Error',
+      content: errorMessage,
+      confirmText: 'Okay!',
+      cancelText: 'Go back',
+    };
+
+    const dialogRef = this.matDialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        confirmationDialogDetails,
+      },
     });
   }
 
@@ -119,7 +134,12 @@ export class RoleManagementComponent implements OnInit, OnDestroy {
           duration: 3000,
         });
       },
-      error: () => {
+      error: (error) => {
+        console.log(error);
+        if (error.errorCode === 'userWithRoleExists') {
+          this.openRoleDeleteErrorDialog(roleToDelete, error.message);
+        }
+
         this._snackBar.open('Failed to delete role', 'OK', {
           duration: 3000,
         });
