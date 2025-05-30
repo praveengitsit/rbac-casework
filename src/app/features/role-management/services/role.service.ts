@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Role } from '../models/role';
 
 @Injectable({
@@ -19,11 +19,6 @@ export class RoleService {
     //
   }
 
-  /**
-   * Fetches the list of roles from the API and updates the roles$ stream.
-   * Subscribers to roles$ will receive the new list.
-   * @returns Observable<Role[]> The fetched roles.
-   */
   getRoleList(): Observable<Role[]> {
     return this.http.get<Role[]>(this.rolesApiEndpoint).pipe(
       tap((roles) => {
@@ -31,7 +26,7 @@ export class RoleService {
       }),
       catchError((err) => {
         console.error('Error fetching roles:', err);
-        this.roleListSubject.next([]); // Emit empty array on error to clear previous state
+        this.roleListSubject.next([]);
         return throwError(
           () => new Error('Failed to fetch roles: ' + err.message),
         );
@@ -53,7 +48,6 @@ export class RoleService {
   }
 
   updateRole(role: Role): Observable<Role> {
-    // Assuming a RESTful API where PUT updates a resource by its ID in the URL
     return this.http
       .put<Role>(`${this.rolesApiEndpoint}/${role.name}`, role)
       .pipe(
