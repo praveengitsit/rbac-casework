@@ -1,0 +1,60 @@
+.not-found-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px); // Adjust 64px if your navbar/toolbar height is different
+  text-align: center;
+  padding: 2rem;
+  background-color: #f4f7f6; // A light, neutral background
+  font-family: 'Roboto', sans-serif; // Consistent with Angular Material
+}
+
+.not-found-content {
+  max-width: 600px;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  .not-found-icon {
+    font-size: 5rem; // Make the icon large
+    color: #e91e63; // Your primary pink color, or another warning color like #ffcc00
+    margin-bottom: 1rem;
+    display: block; // Center the icon
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: #2c3e50; // Dark, professional blue
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .message {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  button[mat-raised-button] {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .not-found-content h1 {
+    font-size: 2rem;
+  }
+  .not-found-icon {
+    font-size: 4rem;
+  }
+  .message {
+    font-size: 1rem;
+  }
+}
