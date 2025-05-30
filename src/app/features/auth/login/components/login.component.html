@@ -55,6 +55,10 @@
           }
         </mat-form-field>
 
+        <div class="info-message-container" *ngIf="loginFormErrorMessage">
+          <p class="info-message-text">{{ loginFormErrorMessage }}</p>
+        </div>
+
         <button
           mat-raised-button
           color="primary"

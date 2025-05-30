@@ -122,6 +122,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
       if (this.username) {
         this.username.disable();
       }
+      if (this.password) {
+        this.password.removeValidators(Validators.required);
+        this.password.updateValueAndValidity();
+      }
     }
 
     this.roleListSubscription = this.roleService
@@ -143,10 +147,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       firstName: this.firstName?.value,
       lastName: this.lastName?.value,
       username: this.username?.value,
-      password:
-        this.matDialogData.userToEdit === undefined
-          ? this.password?.value
-          : null,
+      password: this.password?.value ?? null,
       email: this.email?.value,
       phone: this.phone?.value,
       department: this.department?.value,

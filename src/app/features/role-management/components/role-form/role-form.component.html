@@ -41,9 +41,9 @@
             @if (permissionList?.value?.length) {
               <mat-chip-listbox>
                 @for (permission of permissionList?.value; track permission) {
-                  <mat-chip>{{
-                    permission | permissionInView | titlecase
-                  }}</mat-chip>
+                  <mat-chip>
+                    {{ permission | permissionInView | titlecase }}
+                  </mat-chip>
                 }
                 <!-- @if (permissionList?.value?.length > 2) {
                   <span class="text-xs ml-1 text-gray-500 dark:text-gray-400">
@@ -56,11 +56,12 @@
             }
           </mat-select-trigger>
           @for (permission of availablePermissions; track permission.name) {
-            <mat-option [value]="permission.name">
-              {{ permission.name | permissionInView | titlecase }}
-              <small class="text-xs text-gray-500 dark:text-gray-400">
-                {{ permission.description }}
-              </small>
+            <mat-option [value]="permission.name" class="permission-option">
+              <div class="permission-option-content">
+                <span class="permission-name">
+                  {{ permission.name | permissionInView | titlecase }}
+                </span>
+              </div>
             </mat-option>
           }
         </mat-select>

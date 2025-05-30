@@ -1,0 +1,16 @@
+.permission-option {
+  .permission-option-content {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .permission-name {
+    font-weight: 500;
+  }
+
+  .permission-description {
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}

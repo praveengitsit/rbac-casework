@@ -9,6 +9,8 @@ import { LocalStorageService } from '../../../core/services/local-storage.servic
 import { map } from 'rxjs/internal/operators/map';
 import { LoginUserRequest } from '../login/models/login-user-request';
 import { ExtendedUser, User } from '../../user-management/models/users';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +56,9 @@ export class AuthService {
           } else {
             this.isAuthenticatedSubject.next(false);
           }
+        }),
+        catchError((err) => {
+          return throwError(() => err);
         }),
         map((response) => !!response.accessToken),
       );

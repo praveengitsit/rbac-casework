@@ -16,7 +16,6 @@ import { ExtendedUser } from '../../../features/user-management/models/users';
     MatSidenavModule,
     MatNavList,
     MatListItem,
-    MatIcon,
     NgIf,
     AsyncPipe,
   ],

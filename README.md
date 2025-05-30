@@ -59,6 +59,18 @@ To manage users and their permissions within an application through a system of 
     2.  Start the development server: `ng serve` or `npm start`
     3.  The application will typically be accessible at [http://localhost:4200](https://www.google.com/search?q=http://localhost:4200).
 
+### 2.5. Credentials
+
+Use the following credentials to log into the application:
+
+UserName: superadmin
+Password: superadmin
+
+Similarly, you can also use the following credentials for a more limited access level:
+
+UserName: johndoe
+Password: johndoe
+
 ## 3. Project Structure
 
 ### 3.1. Backend (Node.js/Express - `server.js`):

@@ -78,12 +78,12 @@
     },
     {
       "firstName": "Mr John",
-      "lastName": "Doe",
+      "lastName": "Doel",
       "email": "john@gmail.com",
-      "department": "",
+      "department": "Frontdesk",
       "phone": "",
       "username": "johndoe",
-      "password": "$2b$10$1Rd17dr3w7Xzo7VuQEGJlePBjtqerlNk0micLpD3TxGcGym.RaPc2",
+      "password": "$2b$10$cKqsjHWB4WEOuUf0bUnbae.HTbKtSju4mNPADvXTvvHQx.4LET6sq",
       "role": "admin"
     }
   ]

@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    NgIf,
   ],
   standalone: true,
   templateUrl: './login.component.html',
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
   public readonly FormSubmissionStatus = FormSubmissionStatus;
 
   protected loginForm: FormGroup;
+  protected loginFormErrorMessage = '';
 
   protected formSubmissionStatus: FormSubmissionStatus =
     FormSubmissionStatus.initial;
@@ -64,8 +67,6 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password,
     };
 
-    console.log(loginUserRequest);
-
     this.authService.login(loginUserRequest).subscribe({
       next: (isLoggedIn) => {
         if (isLoggedIn) {
@@ -77,7 +78,11 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         this.formSubmissionStatus = FormSubmissionStatus.failure;
-        console.error('Login failed:', error);
+        if (error.status === 401) {
+          this.loginFormErrorMessage = 'Invalid username or password';
+        } else {
+          this.loginFormErrorMessage = 'Something went wrong';
+        }
       },
     });
   }

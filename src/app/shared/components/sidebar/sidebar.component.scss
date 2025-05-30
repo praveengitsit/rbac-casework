@@ -12,6 +12,10 @@ mat-nav-list {
   overflow: auto;
   box-sizing: border-box;
 
+  a {
+    margin-bottom: 0.5rem;
+  }
+
   .sidebar-link {
     text-decoration: none; // Remove underline from links
     color: inherit; // Inherit text color
