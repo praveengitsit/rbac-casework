@@ -1,0 +1,87 @@
+// /Users/praveenbhusal/Documents/All Development/Frontend/ITONICS/rbac-casework/src/app/features/landing/landing.component.scss
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px); 
+  padding: 2rem;
+  text-align: center;
+  background-color: #f4f7f6; 
+  color: #333;
+}
+
+.landing-header {
+  margin-bottom: 3rem;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    color: #2c3e50; 
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: #555;
+    font-weight: 300;
+  }
+}
+
+.features-overview {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px; 
+  margin-bottom: 3rem;
+
+  .feature-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    min-width: 250px; 
+
+    mat-icon {
+      font-size: 3rem;
+      color: #e91e63; 
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #34495e;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #7f8c8d; 
+      line-height: 1.6;
+    }
+  }
+}
+
+.landing-footer {
+  margin-top: auto; 
+  padding-top: 2rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .landing-header h1 {
+    font-size: 2.5rem;
+  }
+  .features-overview {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-card {
+    width: 80%;
+    max-width: 400px;
+  }
+}
