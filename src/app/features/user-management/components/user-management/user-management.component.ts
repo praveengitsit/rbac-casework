@@ -120,7 +120,6 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
       if (result !== undefined && result === 'confirm') {
         this.deleteUser(userToDelete);
       }

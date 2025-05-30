@@ -25,8 +25,8 @@
                 <span>Name is required.</span>
               } @else if (name?.errors?.["minlength"]) {
                 <span>Name must be at least 3 characters long.</span>
-              } @else {
-                <span>{{ name?.errors }}</span>
+              } @else if (name?.errors?.["roleNameAlreadyExists"]) {
+                <span>Role name already exists.</span>
               }
             </mat-error>
           }

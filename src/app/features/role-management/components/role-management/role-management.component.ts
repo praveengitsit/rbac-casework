@@ -135,7 +135,6 @@ export class RoleManagementComponent implements OnInit, OnDestroy {
         });
       },
       error: (error) => {
-        console.log(error);
         if (error.errorCode === 'userWithRoleExists') {
           this.openRoleDeleteErrorDialog(roleToDelete, error.message);
         }

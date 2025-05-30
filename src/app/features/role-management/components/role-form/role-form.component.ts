@@ -130,7 +130,13 @@ export class RoleFormComponent implements OnInit, OnDestroy {
         this.dialogRef.close(addedRole);
       },
       error: (err) => {
-        this.name?.setErrors(err);
+        if (err.status === 409) {
+          this.setRoleNameAlreadyExistsError();
+        } else {
+          this._snackBar.open('Failed to add role!', 'OK', {
+            duration: 3000,
+          });
+        }
       },
     });
   }
@@ -144,9 +150,19 @@ export class RoleFormComponent implements OnInit, OnDestroy {
         this.dialogRef.close(updatedRole);
       },
       error: (err) => {
-        this.name?.setErrors(err);
+        if (err.status === 409) {
+          this.setRoleNameAlreadyExistsError();
+        } else {
+          this._snackBar.open('Failed to add role!', 'OK', {
+            duration: 3000,
+          });
+        }
       },
     });
+  }
+
+  setRoleNameAlreadyExistsError() {
+    this.name?.setErrors({ roleNameAlreadyExists: true });
   }
 
   ngOnDestroy(): void {

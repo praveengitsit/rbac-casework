@@ -41,8 +41,7 @@ export class RoleService {
         this.roleListSubject.next([...currentRoles, addedRole]);
       }),
       catchError((err) => {
-        console.error('Error adding role:', err);
-        return throwError(() => new Error(err.message));
+        return throwError(() => err);
       }),
     );
   }

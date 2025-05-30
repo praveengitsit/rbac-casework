@@ -56,7 +56,7 @@
       ]
     },
     {
-      "name": "kathmandu",
+      "name": "admin",
       "permissionList": [
         "view_users",
         "create_users",
@@ -77,24 +77,14 @@
       "role": "superadmin"
     },
     {
-      "firstName": "Hero",
-      "lastName": "Apple",
-      "email": "p@gmai.c",
-      "department": "Apple Eating",
-      "phone": "89788098978",
-      "username": "hero",
-      "password": "$2b$10$BTWQxK8wSdUNyFiLkmMp6.D8COQ5L3Ywp9moTEvRVmzwo1RfvLgL6",
-      "role": "kathmandu"
-    },
-    {
-      "firstName": "Ramesh",
-      "lastName": "Suresh",
-      "email": "3232@asd",
+      "firstName": "Mr John",
+      "lastName": "Doe",
+      "email": "john@gmail.com",
       "department": "",
       "phone": "",
-      "username": "ramesh@gmail.com",
-      "password": "$2b$10$0njJt8n9fw2e25rckeQkCeFkwYXmszWT1Ifv.fDOgLeb4I66s3qh2",
-      "role": "kathmandu"
+      "username": "johndoe",
+      "password": "$2b$10$1Rd17dr3w7Xzo7VuQEGJlePBjtqerlNk0micLpD3TxGcGym.RaPc2",
+      "role": "admin"
     }
   ]
 }

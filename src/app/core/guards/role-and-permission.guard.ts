@@ -26,14 +26,6 @@ export const roleAndPermissionGuard: CanActivateFn = (route, state) => {
       }
 
       return false;
-
-      // if (loggedInUser) {
-      //   console.log('Authenticated');
-      //   return true;
-      // } else {
-      //   this.router.navigate(['/login']);
-      //   return false;
-      // }
     }),
   );
 };
