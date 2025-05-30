@@ -25,6 +25,8 @@ export const roleAndPermissionGuard: CanActivateFn = (route, state) => {
         return true;
       }
 
+      router.navigate(['/unknown']);
+
       return false;
     }),
   );

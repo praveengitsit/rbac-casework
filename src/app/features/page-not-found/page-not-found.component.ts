@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -8,4 +8,10 @@ import { RouterModule } from '@angular/router';
   templateUrl: './page-not-found.component.html',
   styleUrl: './page-not-found.component.scss',
 })
-export class PageNotFoundComponent {}
+export class PageNotFoundComponent {
+  constructor(private router: Router) {}
+
+  goBack() {
+    this.router.navigateByUrl('/home');
+  }
+}
