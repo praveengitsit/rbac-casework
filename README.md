@@ -97,11 +97,13 @@ Similarly, you can also use the following credentials for a more limited access 
         -   `role-management/`: Components and services for managing roles.
             -   `components/role-details/role-details.component.ts` (`.html`, `.scss`): Displays details of a specific role.
             -   _(Other components like `role-list`, `role-form` would be here)_
+            -   Some edge cases haven't been handled here. Eg: If a user has a "Edit user" permission but not the "View user" permission, they still won't be able to do any editing within the app. Cases similar to this have been left out of the implementation.
         -   `user-management/`: Components and services for managing users.
             -   `components/user-details/user-details.component.ts` (`.html`, `.scss`): Displays details of a specific user.
             -   `components/user-form/user-form.component.ts` (`.html`, `.scss`): Form for creating/editing users.
             -   `components/user-management/user-management.component.ts` (`.html`, `.scss`): Lists users and provides management actions.
             -   `services/user.service.ts`: Handles user-related API calls.
+        - Components similar to `UserFormComponent` are displayed within a Material dialog, and need to have their data injected into them. This injection, as you will see, is not fully typesafe. An alternative would be toggle a custom dialog template (all with backdrops and z-indexs high) where data is passed through @Input(). But let's hope the use of signals solve this problem altogether in a much neater way in the future.
     -   `shared/`: Reusable components
         -   `components/navbar/navbar.component.ts` (`.html`, `.scss`): Application's top navigation bar.
         -   `components/sidebar/sidebar.component.ts` (`.html`, `.scss`): Application's side navigation menu.
