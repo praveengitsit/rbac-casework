@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, inject } from '@angular/core';
+import { Component, OnInit, Inject, inject, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -26,12 +26,7 @@ import { TitleCasePipe } from '@angular/common';
 import { RoleService } from '../../services/role.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-export interface Role {
-  id?: string | number; // Optional for new roles
-  name: string;
-  permissionList: string[];
-}
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-role-form',
@@ -50,7 +45,7 @@ export interface Role {
     MatButtonModule,
   ],
 })
-export class RoleFormComponent implements OnInit {
+export class RoleFormComponent implements OnInit, OnDestroy {
   // protected readonly matDialogData: {
   //   roleToEdit: Role;
   // } = inject(MAT_DIALOG_DATA);
@@ -152,5 +147,11 @@ export class RoleFormComponent implements OnInit {
         this.name?.setErrors(err);
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.permissionListSubscription) {
+      this.permissionListSubscription.unsubscribe();
+    }
   }
 }

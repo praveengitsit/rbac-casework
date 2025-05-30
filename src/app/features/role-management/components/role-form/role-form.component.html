@@ -2,10 +2,12 @@
   {{ matDialogData.roleToEdit === undefined ? "Add new role" : "Edit Role" }}
 </h2>
 <mat-dialog-content class="mat-typography">
-  <div
-    class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md max-w-lg mx-auto"
-  >
-    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="space-y-6">
+  <div class="role-form-dialog-content-inner">
+    <form
+      [formGroup]="roleForm"
+      (ngSubmit)="onSubmit()"
+      class="form-vertical-spacing"
+    >
       <!-- Role Name -->
       <div>
         <mat-form-field appearance="outline" class="w-full">

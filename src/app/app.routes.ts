@@ -20,7 +20,7 @@ export const routes: Routes = [
         path: 'users',
         loadComponent: () =>
           import(
-            './features/user-management/components/user-management.component'
+            './features/user-management/components/user-management/user-management.component'
           ).then((m) => m.UserManagementComponent),
       },
     ],

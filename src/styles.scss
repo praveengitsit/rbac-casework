@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "flowbite/dist/flowbite.min.css";
+// @import "flowbite/dist/flowbite.min.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -10,4 +10,80 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
   .mdc-notched-outline__notch {
   border-right-style: hidden;
+}
+
+
+$sm-breakpoint: 640px; // Tailwind's sm breakpoint
+
+$color-white: #ffffff;
+$color-gray-500: #6b7280;
+$color-gray-800: #1f2937; 
+
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06); // Equivalent to Tailwind's shadow-md
+
+$spacing-unit: 0.25rem; 
+$space-3: $spacing-unit * 3;
+$space-4: $spacing-unit * 4;
+$space-6: $spacing-unit * 6;
+
+$border-radius-lg: 0.5rem;
+
+$max-width-lg: 32rem; 
+
+$font-weight-semibold: 600; 
+
+.management-header {
+  position: relative;
+  overflow: hidden;
+  background-color: $color-white;
+  box-shadow: $shadow-md;
+
+  @media (min-width: $sm-breakpoint) {
+    border-radius: $border-radius-lg;
+  }
+
+  &__content {
+    padding: $space-4; // Corresponds to p-4
+
+    > :not([hidden]) ~ :not([hidden]) {
+      margin-top: $space-3;
+    }
+
+     @media (min-width: $sm-breakpoint) {
+      display: flex; // Corresponds to sm:flex
+      align-items: center; // Corresponds to items-center (effective with flex)
+      justify-content: space-between; // Corresponds to justify-between (effective with flex)
+      // flex-direction: row; is the default for flex, so Tailwind's flex-row is covered.
+
+      // Styles for sm screens and up (Tailwind's sm:space-y-0 and sm:space-x-4)
+      > :not([hidden]) ~ :not([hidden]) {
+        margin-top: 0; // Corresponds to sm:space-y-0
+        margin-left: $space-4; // Corresponds to sm:space-x-4
+      }
+    }
+  }
+
+  &__title {
+    margin-right: $space-3; 
+    font-weight: $font-weight-semibold; 
+  }
+
+  &__description {
+    color: $color-gray-500; 
+  }
+}
+
+.role-form-dialog-content-inner {
+  padding: $space-6; // p-6
+  background-color: $color-white; // bg-white
+  border-radius: $border-radius-lg; // rounded-lg
+  box-shadow: $shadow-md; // shadow-md
+  max-width: $max-width-lg; // max-w-lg
+  margin-left: auto; // mx-auto
+  margin-right: auto; // mx-auto
+}
+
+.form-vertical-spacing > :not([hidden]) ~ :not([hidden]) {
+  margin-top: $space-6;
 }
