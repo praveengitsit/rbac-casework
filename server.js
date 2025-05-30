@@ -106,7 +106,7 @@ app.get('/api/users/:username', authenticateToken, async (req, res) => {
 
 // POST /api/users - Add a new user
 app.post('/api/users', authenticateToken, async (req, res) => {
-  const { username, password, role } = req.body;
+  const { firstName, lastName, username, password, role, email, department, phone } = req.body;
   if (!username || !password || !role) {
     return res.status(400).send('Username, password, and role are required.');
   }
@@ -119,7 +119,7 @@ app.post('/api/users', authenticateToken, async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, HASH_FACTOR);
-  const newUser = { username, password: hashedPassword, role };
+  const newUser = { firstName, lastName, email, department, phone, username, password: hashedPassword, role };
   data.users.push(newUser);
 
   const success = await writeDatabase(data);

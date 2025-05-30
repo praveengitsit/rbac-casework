@@ -82,6 +82,24 @@
       "department": "HOD IT",
       "password": "$2a$10$iG7ssFL9tAyeU3b/udgADefa1OVe75rUq09uvnHQPhEyWI6erH5K6",
       "role": "superadmin"
+    },
+    {
+      "firstName": "Praveen",
+      "lastName": "Bhusal",
+      "username": "praveenbhusal",
+      "email": "praveenbhusal97@gmail.com",
+      "password": "$2a$10$iG7ssFL9tAyeU3b/udgADefa1OVe75rUq09uvnHQPhEyWI6erH5K6",
+      "role": "admin"
+    },
+    {
+      "firstName": "Hero",
+      "lastName": "Apple",
+      "email": "p@gmai.c",
+      "department": "Apple Eating",
+      "phone": "89788098978",
+      "username": "hero",
+      "password": "$2b$10$BTWQxK8wSdUNyFiLkmMp6.D8COQ5L3Ywp9moTEvRVmzwo1RfvLgL6",
+      "role": "kathmandu"
     }
   ]
 }
