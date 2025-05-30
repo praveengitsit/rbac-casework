@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { User } from '../../models/users';
+import { ExtendedUser, User } from '../../models/users';
 import { UserService } from '../../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { ConfirmationDialogInterface } from '../../../../shared/components/confirmation-dialog/confirmation-dialog-interface';
 import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { Observable } from 'rxjs/internal/Observable';
+import { AuthService } from '../../../auth/services/auth.service';
+import { shareReplay } from 'rxjs/internal/operators/shareReplay';
 
 @Component({
   selector: 'app-user-management',
@@ -38,6 +41,17 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   protected users: User[] = [];
 
   protected userListSubscription: Subscription | undefined;
+  protected loggedInUserPermissionsBoolean: {
+    hasUserCreatePermission: boolean;
+    hasUserViewPermission: boolean;
+    hasUserEditPermission: boolean;
+    hasUserDeletePermission: boolean;
+  } = {
+    hasUserCreatePermission: false,
+    hasUserViewPermission: false,
+    hasUserEditPermission: false,
+    hasUserDeletePermission: false,
+  };
 
   @ViewChild(MatTable) table!: MatTable<User>;
   private _snackBar = inject(MatSnackBar);
@@ -45,9 +59,20 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private matDialog: MatDialog,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
+    const loggedInUser = this.authService.getLoggedInUser();
+    const loggedInUserPermissions = loggedInUser?.permissions ?? [];
+
+    this.loggedInUserPermissionsBoolean = {
+      hasUserCreatePermission: loggedInUserPermissions.includes('create_users'),
+      hasUserViewPermission: loggedInUserPermissions.includes('view_users'),
+      hasUserEditPermission: loggedInUserPermissions.includes('edit_users'),
+      hasUserDeletePermission: loggedInUserPermissions.includes('delete_users'),
+    };
+
     this.userListSubscription = this.userService.userList$.subscribe(
       (fetchedUsers) => {
         this.users = fetchedUsers;

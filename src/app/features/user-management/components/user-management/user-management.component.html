@@ -6,7 +6,13 @@
         Manage all your existing users or add a new one
       </p>
     </div>
-    <button mat-flat-button (click)="openUserForm()">Add new user</button>
+    <button
+      mat-flat-button
+      (click)="openUserForm()"
+      [disabled]="loggedInUserPermissionsBoolean.hasUserCreatePermission"
+    >
+      Add new user
+    </button>
   </div>
 </div>
 <div>
@@ -62,13 +68,19 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button
+            mat-menu-item
+            [disabled]="loggedInUserPermissionsBoolean.hasUserViewPermission"
+          >
             <mat-icon>info</mat-icon>
             <span>View</span>
           </button>
           <button
             mat-menu-item
-            [disabled]="user.username === 'superadmin'"
+            [disabled]="
+              user.username === 'superadmin' ||
+              loggedInUserPermissionsBoolean.hasUserEditPermission
+            "
             (click)="openUserForm(user)"
           >
             <mat-icon>edit</mat-icon>
@@ -76,7 +88,10 @@
           </button>
           <button
             mat-menu-item
-            [disabled]="user.username === 'superadmin'"
+            [disabled]="
+              user.username === 'superadmin' ||
+              loggedInUserPermissionsBoolean.hasUserDeletePermission
+            "
             (click)="openConfirmDialog(user)"
           >
             <mat-icon>delete</mat-icon>
