@@ -1,132 +1,77 @@
-<!-- <div>
-  <div>
-    <div>
-      <div>
-        <img src="assets/images/app-logo.png" alt="app-logo" />
-      </div>
-      <div>Welcome to YouPass</div>
+<div class="login-page-container">
+  <mat-card class="login-form-card">
+    <div class="login-logo-container">
+      <img
+        src="assets/images/app-logo.png"
+        alt="app-logo"
+        class="login-logo-image"
+      />
     </div>
-    <div class="card">
-      <div class="card-body">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input
-              type="text"
-              formControlName="username"
-              class="form-control"
-            />
-            @if (
-              loginForm.controls["username"].invalid &&
-              (loginForm.controls["username"].touched ||
-                loginForm.controls["username"].dirty)
-            ) {
+    <mat-card-content>
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="login-actual-form"
+      >
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            formControlName="username"
+            placeholder="Enter your username"
+            type="text"
+          />
+          @if (
+            loginForm.controls["username"].invalid &&
+            (loginForm.controls["username"].touched ||
+              loginForm.controls["username"].dirty)
+          ) {
+            <mat-error>
               @if (loginForm.controls["username"].errors?.["required"]) {
-                <small>*Username is a required field</small>
+                <span>*Username is a required field</span>
               }
-            }
-          </div>
+            </mat-error>
+          }
+        </mat-form-field>
 
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              formControlName="password"
-              class="form-control"
-            />
-            @if (
-              loginForm.controls["password"].invalid &&
-              (loginForm.controls["password"].touched ||
-                loginForm.controls["password"].dirty)
-            ) {
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            placeholder="Enter your password"
+          />
+          @if (
+            loginForm.controls["password"].invalid &&
+            (loginForm.controls["password"].touched ||
+              loginForm.controls["password"].dirty)
+          ) {
+            <mat-error>
               @if (loginForm.controls["password"].errors?.["required"]) {
-                <small>*Password is a required field</small>
+                <span>*Password is a required field</span>
               }
-            }
-          </div>
+            </mat-error>
+          }
+        </mat-form-field>
 
-          <button
-            [disabled]="
-              formSubmissionStatus === FormSubmissionStatus.inProgress
-            "
-            class="btn btn-primary"
-          >
-            @if (formSubmissionStatus === FormSubmissionStatus.inProgress) {
-              <span class="spinner-border spinner-border-sm mr-1"></span>
-            }
-
-            Login
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div
-  class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-6 px-4 sm:px-6 lg:px-8"
->
-  <form
-    class="max-w-sm w-full bg-white p-6 rounded-xl shadow-xl dark:bg-gray-800 dark:border dark:border-gray-700"
-    [formGroup]="loginForm"
-    (ngSubmit)="onSubmit()"
-  >
-    <div class="mb-5 flex justify-center">
-      <img class="h-10 w-10" src="assets/images/app-logo.png" alt="app-logo" />
-    </div>
-    <div class="mb-5">
-      <label
-        for="email"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >Username</label
-      >
-      <input
-        type="email"
-        formControlName="username"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Enter your email"
-      />
-
-      @if (
-        loginForm.controls["username"].invalid &&
-        (loginForm.controls["username"].touched ||
-          loginForm.controls["username"].dirty)
-      ) {
-        @if (loginForm.controls["username"].errors?.["required"]) {
-          <small>*Username is a required field</small>
-        }
-      }
-    </div>
-    <div class="mb-5">
-      <label
-        for="password"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >Password</label
-      >
-      <input
-        type="password"
-        formControlName="password"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="Enter your password"
-      />
-
-      @if (
-        loginForm.controls["password"].invalid &&
-        (loginForm.controls["password"].touched ||
-          loginForm.controls["password"].dirty)
-      ) {
-        @if (loginForm.controls["password"].errors?.["required"]) {
-          <small>*Password is a required field</small>
-        }
-      }
-    </div>
-    <button
-      type="submit"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    >
-      @if (formSubmissionStatus === FormSubmissionStatus.inProgress) {
-        <app-spinner />
-      }
-      Submit
-    </button>
-  </form>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="
+            loginForm.invalid ||
+            formSubmissionStatus === FormSubmissionStatus.inProgress
+          "
+          class="login-submit-button"
+        >
+          @if (formSubmissionStatus === FormSubmissionStatus.inProgress) {
+            <app-spinner />
+          } @else {
+            <span>Submit</span>
+          }
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

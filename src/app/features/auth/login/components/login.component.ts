@@ -10,10 +10,21 @@ import { FormSubmissionStatus } from '../../../../core/models/form-submission-st
 import { AuthService } from '../../services/auth.service';
 import { LoginUserRequest } from '../models/login-user-request';
 import { SpinnerComponent } from '../../../../shared/components/spinner/spinner.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, SpinnerComponent],
+  imports: [
+    ReactiveFormsModule,
+    SpinnerComponent,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

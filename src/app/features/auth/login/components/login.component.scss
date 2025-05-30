@@ -1,0 +1,53 @@
+.login-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; // Full viewport height
+  background-color: #f0f2f5; // A light, neutral background
+  padding: 16px; // Consistent padding
+}
+
+.login-form-card {
+  width: 100%;
+  max-width: 400px; // Constrain form width
+  // mat-card provides its own padding and shadow, which is generally good.
+}
+
+.login-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px; // Space below the logo
+  padding-top: 16px; // If logo is the very first visual element in the card
+}
+
+.login-logo-image {
+  height: 40px; // Matches original h-10
+  width: 40px;  // Matches original w-10
+}
+
+.login-actual-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Space between form fields and button
+
+  mat-form-field {
+    width: 100%; // Make form fields take the full width of the form
+  }
+}
+
+.login-submit-button {
+  width: 100%; // Make button full width
+  min-height: 48px; // Good touch target size, accommodates spinner
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Styles for your app-spinner if it needs specific sizing within the button
+  app-spinner {
+    // e.g., if app-spinner wraps mat-progress-spinner:
+    // ::ng-deep .mat-mdc-progress-spinner {
+    //   width: 24px !important;
+    //   height: 24px !important;
+    // }
+  }
+}
