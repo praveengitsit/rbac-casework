@@ -8,3 +8,7 @@ export interface User {
   department?: string;
   role: string;
 }
+
+export interface ExtendedUser extends User {
+  permissions: string[];
+}

@@ -8,6 +8,7 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { map } from 'rxjs/internal/operators/map';
 import { LoginUserRequest } from '../login/models/login-user-request';
+import { ExtendedUser, User } from '../../user-management/models/users';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,11 @@ export class AuthService {
     this.checkAuth(),
   );
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+  private loggedInUserSubject = new BehaviorSubject<ExtendedUser | null>(
+    this.getLoggedInUser(),
+  );
+  loggedInUser$ = this.loggedInUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
     //
@@ -43,6 +49,7 @@ export class AuthService {
         tap((response) => {
           if (response.accessToken) {
             this.localStorageService.setAccessToken(response.accessToken);
+            this.setLoggedInUser(response.user!);
             this.isAuthenticatedSubject.next(true);
           } else {
             this.isAuthenticatedSubject.next(false);
@@ -52,8 +59,22 @@ export class AuthService {
       );
   }
 
+  getLoggedInUser(): ExtendedUser | null {
+    return this.localStorageService.getUser();
+  }
+
+  private setLoggedInUser(user: ExtendedUser): void {
+    this.localStorageService.setUser(user);
+    this.loggedInUserSubject.next(user);
+  }
+
+  removeLoggedInUser(): void {
+    this.localStorageService.deleteUser();
+  }
+
   logout(): void {
     this.localStorageService.deleteAccessToken();
+    this.localStorageService.deleteUser();
     this.isAuthenticatedSubject.next(false);
   }
 }

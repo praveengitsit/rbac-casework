@@ -40,12 +40,16 @@
 </aside> -->
 
 <mat-nav-list>
-  <a routerLink="./roles">
-    <mat-list-item>
-      <mat-icon mat-list-icon>key</mat-icon>
-      <span class="w-100">Role management</span>
-    </mat-list-item>
-  </a>
+  <ng-container *ngIf="loggedInUser$ | async as user">
+    <ng-container *ngIf="user.role === 'superadmin'">
+      <a routerLink="./roles">
+        <mat-list-item>
+          <mat-icon mat-list-icon>key</mat-icon>
+          <span class="w-100">Role management</span>
+        </mat-list-item>
+      </a>
+    </ng-container>
+  </ng-container>
 
   <a routerLink="./users">
     <mat-list-item>
