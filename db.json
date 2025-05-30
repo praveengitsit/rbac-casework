@@ -1,6 +1,11 @@
 {
   "permissions": [
     {
+      "name": "minimum",
+      "description": "Only can see the landing page",
+      "assignable": true
+    },
+    {
       "name": "view_roles",
       "description": "Can view all roles",
       "assignable": false
@@ -63,6 +68,12 @@
         "edit_users",
         "delete_users"
       ]
+    },
+    {
+      "name": "basic",
+      "permissionList": [
+        "minimum"
+      ]
     }
   ],
   "users": [
@@ -85,6 +96,16 @@
       "username": "johndoe",
       "password": "$2b$10$cKqsjHWB4WEOuUf0bUnbae.HTbKtSju4mNPADvXTvvHQx.4LET6sq",
       "role": "admin"
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Harris",
+      "email": "",
+      "department": "",
+      "phone": "",
+      "username": "jane",
+      "password": "$2b$10$dMHNhc.Iaya/xEcFpnSFXeJ9r4P27BGgYgtS7ipVP9hlaPH6K6Az6",
+      "role": "basic"
     }
   ]
 }

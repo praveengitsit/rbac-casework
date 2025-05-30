@@ -14,12 +14,17 @@
         </div>
       </a>
     </ng-container>
-  </ng-container>
 
-  <a mat-list-item routerLink="./users" routerLinkActive="active-list-item">
-    <div>
-      <!-- <mat-icon mat-list-icon>groups</mat-icon> -->
-      <span class="w-100">User management</span>
-    </div>
-  </a>
+    <a
+      mat-list-item
+      routerLink="./users"
+      routerLinkActive="active-list-item"
+      *ngIf="user.permissions.includes('view_users')"
+    >
+      <div>
+        <!-- <mat-icon mat-list-icon>groups</mat-icon> -->
+        <span class="w-100">User management</span>
+      </div>
+    </a>
+  </ng-container>
 </mat-nav-list>
